@@ -30,6 +30,13 @@ async function create(req, res, next) {
   }
 }
 
+async function read(req, res, next) {
+  Url.findOne(req.params)
+    .then((obj) => res.redirect(obj.url))
+    .catch((err) => console.log(err));
+}
+
 module.exports = {
   create,
+  read,
 };
