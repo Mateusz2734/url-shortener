@@ -2,12 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const urlSchema = new Schema({
-  _id: String,
-  url: String,
-  shortUrl: String,
-  createdAt: Date,
+  _id: { type: String, required: true },
+  url: { type: String, required: true },
+  createdAt: { type: Date, required: true },
 });
 
-const url = mongoose.model("Url", urlSchema);
+const Url = mongoose.model("Url", urlSchema);
 
-module.exports = url;
+module.exports = Url;
