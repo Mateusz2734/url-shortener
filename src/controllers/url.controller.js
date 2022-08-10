@@ -1,7 +1,7 @@
 const getId = require("../utils/id.util");
 const Url = require("../models/url.model");
 
-async function create(req, res, next) {
+function create(req, res, next) {
   if (req.body.url) {
     const longUrl = req.body.url;
     const id = getId();
@@ -10,9 +10,16 @@ async function create(req, res, next) {
 
     newUrl
       .save()
-      .then((obj) =>
-        res.status(200).json({ message: "Saved successfully", obj: obj })
-      )
+      .then((obj) => {
+        const fullUrl = `${req.protocol}://${req.get("host")}/${obj._id}`;
+        res
+          .status(200)
+          .json({
+            message: "Saved successfully",
+            oldUrl: longUrl,
+            newUrl: fullUrl,
+          });
+      })
       .catch((err) => {
         console.log(err);
         res.status(500).json({ error: err });
@@ -30,10 +37,12 @@ async function create(req, res, next) {
   }
 }
 
-async function read(req, res, next) {
+function read(req, res, next) {
   Url.findOne(req.params)
     .then((obj) => res.redirect(obj.url))
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      res.redirect("/404");
+    });
 }
 
 module.exports = {
