@@ -2,10 +2,11 @@ const getId = require("../utils/id.util");
 const Url = require("../models/url.model");
 
 function create(req, res, next) {
+  console.log(req.body)
   if (req.body.url) {
     const longUrl = req.body.url;
     const id = getId();
-
+    
     const newUrl = new Url({ _id: id, url: longUrl, createdAt: Date.now() });
 
     newUrl
