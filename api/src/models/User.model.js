@@ -7,8 +7,10 @@ const userSchema = new Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
   urls: [
-    type: mongoose.Schema.Types.ObjectID, 
-    ref: "Url",
+    {
+      type: mongoose.Schema.Types.ObjectID,
+      ref: "Url",
+    },
   ],
 });
 
