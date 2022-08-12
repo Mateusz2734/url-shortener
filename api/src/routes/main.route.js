@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Url = require("../models/url.model");
+const Url = require("../models/Url.model");
 const urlController = require("../controllers/url.controller");
 
 router.get("/", (req, res) => {

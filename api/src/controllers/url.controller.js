@@ -1,5 +1,5 @@
 const getId = require("../utils/id.util");
-const Url = require("../models/url.model");
+const Url = require("../models/Url.model");
 
 function create(req, res, next) {
   console.log(req.body)
