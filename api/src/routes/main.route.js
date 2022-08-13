@@ -15,6 +15,6 @@ router.get("/404", (req, res) => {
     });
 });
 
-router.get("/:_id", urlController.read);
+router.get("/:shortUrl", urlController.read);
 
 module.exports = router;

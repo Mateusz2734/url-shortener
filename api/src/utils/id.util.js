@@ -1,4 +1,4 @@
-const { nanoid, customAlphabet } = require("nanoid");
+const { customAlphabet } = require("nanoid");
 
 function getId() {
   const nanoid = customAlphabet(
