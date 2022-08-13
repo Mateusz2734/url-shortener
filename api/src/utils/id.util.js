@@ -1,7 +1,11 @@
-const { nanoid } = require("nanoid");
+const { nanoid, customAlphabet } = require("nanoid");
 
 function getId() {
-  return nanoid(6);
+  const nanoid = customAlphabet(
+    "useandom26T198340PX75pxJACKVERYMINDBUSHWOLFGQZbfghjklqvwyzrict",
+    6
+  );
+  return nanoid();
 }
 
 module.exports = getId;
