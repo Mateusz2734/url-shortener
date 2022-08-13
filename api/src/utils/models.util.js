@@ -10,12 +10,21 @@ functions = {
     }
   },
 
-  createUrl: async (userId, url) => {
+  createUrlMadeByUser: async (userId, url) => {
     try {
       const newUrl = await Url.create(url);
       const userDocument = await User.findById(userId);
       userDocument.urls.push(newUrl);
       await userDocument.save();
+      return newUrl;
+    } catch (error) {
+      console.log("Error while creating custom Url:\n", error);
+    }
+  },
+
+  createUrl: async (url) => {
+    try {
+      const newUrl = await Url.create(url);
       return newUrl;
     } catch (error) {
       console.log("Error while creating Url:\n", error);
@@ -28,3 +37,5 @@ functions = {
     return allUserUrls;
   },
 };
+
+module.exports = functions;
