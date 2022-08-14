@@ -61,8 +61,8 @@ router.post("/login", async (req, res) => {
     }
 
     // Checking entered password  and comparing with password in Db
-    if (!password === user.password) {
-      return res.status(400).json({ msg: "Invalid credentials" });
+    if (!(password === user.password)) {
+      return res.status(400).json({ message: "Invalid credentials" });
     }
 
     res.json({
