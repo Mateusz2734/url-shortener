@@ -1,9 +1,18 @@
 const User = require("../models/User.model");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 functions = {
   createUser: async (user) => {
     try {
-      const newUser = await User.create(user);
+      const { email, username, password } = user;
+
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+      const newUser = await User.create({
+        email: email,
+        username: username,
+        password: hashedPassword,
+      });
       return newUser;
     } catch (error) {
       console.log("Error while creating User:\n", error);

@@ -1,8 +1,9 @@
 const express = require("express");
-const router = express.Router();
+const bcrypt = require("bcrypt");
 const User = require("../models/User.model");
 const urlController = require("../controllers/url.controller");
 const modelFunctions = require("../utils/models.util");
+const router = express.Router();
 
 router.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome to User route" });
@@ -61,7 +62,9 @@ router.post("/login", async (req, res) => {
     }
 
     // Checking entered password  and comparing with password in Db
-    if (!(password === user.password)) {
+    const match = await bcrypt.compare(password, user.password)
+
+    if (!match) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
