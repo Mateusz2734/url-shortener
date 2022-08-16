@@ -97,10 +97,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/secret", authenticateToken, (req, res) => {
-  res.json({ message: "This is my little secret" });
-});
-
 router.get(
   "/:username",
   authenticateToken,
