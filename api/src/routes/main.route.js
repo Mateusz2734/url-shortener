@@ -8,11 +8,9 @@ router.get("/", (req, res) => {
 });
 
 router.get("/404", (req, res) => {
-  res
-    .status(404)
-    .json({
-      message: "The page you were looking for doesn't exist in our database",
-    });
+  res.status(404).json({
+    message: "The page you were looking for doesn't exist in our database",
+  });
 });
 
 router.get("/:shortUrl", urlController.read);

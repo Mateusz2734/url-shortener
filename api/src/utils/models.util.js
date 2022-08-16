@@ -1,4 +1,5 @@
 const User = require("../models/User.model");
+const Url = require("../models/Url.model");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
@@ -19,10 +20,14 @@ functions = {
     }
   },
 
-  createUrlMadeByUser: async (userId, url) => {
+  createUrlMadeByUser: async (username, url) => {
+    const foundUrl = await Url.findOne({ shortUrl: url.shortUrl });
+    if (foundUrl) {
+      throw new Error("This Url already exists!");
+    }
     try {
       const newUrl = await Url.create(url);
-      const userDocument = await User.findById(userId);
+      const userDocument = await User.findOne({ username: username });
       userDocument.urls.push(newUrl);
       await userDocument.save();
       return newUrl;

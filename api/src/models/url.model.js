@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Url = mongoose.model(
   "Url",
   new mongoose.Schema({
-    shortUrl: { type: String, required: true },
+    shortUrl: { type: String, required: true, unique: true },
     url: { type: String, required: true },
     createdAt: { type: Date, required: true },
   })
